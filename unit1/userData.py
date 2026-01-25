@@ -1,6 +1,7 @@
 import datetime
 #vars
 date = datetime.datetime.now()
+born = False
 yearBorn = date.year
 name = str(input("Enter your name: "))
 heightCm = float(input("Enter your height (cm): "))
@@ -11,10 +12,15 @@ genders = ["M", "F", "m", "f"]
 gender = input("Gender (M/F): ")
 ###
 if month in months:
-    if month >= date.month:
+    if month >= date.month and age >= 0:
+        born = True
         yearBorn = date.year-age-1
-    else:
+    elif month < date.month and age >= 0:
+        born = True
         yearBorn = date.year-age
+    else:
+        born = False
+        yearBorn = "Stop trying to break me!"
 #Name
 print("Hello,", name)
 #Height
@@ -23,14 +29,20 @@ heightIn = round((heightCm % 30.48)/2.54)
 print("Your height is ", heightFtInt, "'", heightIn, sep="")
 #Gender
 if gender in genders:
-    if gender == "m":
-        gender = "M"
-    elif gender == "f":
-        gender = "F"
+    if gender == "m" or gender == "M":
+        gender = "male"
+    elif gender == "f" or gender == "F":
+        gender = "female"
 
     print("You are " + gender)
 else:
     print("Invalid gender!")
 #Age
-print(age)
-print("You were born in ", yearBorn)
+if age >= 0:
+    print("You are", age)
+else:
+    print("You are not less than 0!")
+if born:
+    print("You were born in", yearBorn)
+else:
+    print("Stop trying to break me!")
